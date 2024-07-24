@@ -1,6 +1,6 @@
-import config from '../services/plugins/config.json' assert {'type':"json"};
+import pluginArr from '../services/plugins/config.json' assert {'type':"json"};
 
-export const runPlugins =()=>{
+
     // לבקש מצוות 4 לבנות בשרת שלהם פונקציה שמקבלת מספר ומחזירה נתונים של איקס ימים אחרונים לכל המניות
     // [
     //     {symbol:'שם המניה',data:[{candle},{candle}...]},
@@ -12,12 +12,12 @@ export const runPlugins =()=>{
     // עוברים על הקובץ קונפיגורציה הכללי
     //לכל איבר בקובץ קונפיגורציה-נריץ את הפלאגין בשם המפתח ונשלח לו את הדטה של המניה של שנה אחרונה ואת השדה של המפתח שזה הפרמטרים 
 
-    config.forEach((item)=>{
-        console.log(Object.keys(item));// המפתח של האובייקט
-        console.log(item[Object.keys(item)]);// הערך שבתוך האובייקט
-        
-        let functions=Object.keys(item);
-        let params=item[Object.keys(item)]; 
 
+
+export default function runPlugins(instances) {
+    pluginArr.map(params => {
+        let [pluginName,pluginValue] = Object.entries(params)[0]
+        let instance = instances.find(ins => ins.name == pluginName).instance
+        instance.execute(pluginValue)
     })
 }

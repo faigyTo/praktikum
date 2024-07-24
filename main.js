@@ -1,9 +1,8 @@
 import express from 'express';
-import tryFunc from './controllers/createPluginsIntances.js';
-// import {connectToDB} from './config/DBConfig.js'
 import {config} from "dotenv";
-import createPluginsInstances from './controllers/createPluginsIntances.js'
-import { runPlugins } from './controllers/executePlugins.js';
+import {createPluginsInstances} from './controllers/createPluginsIntances.js'
+import  runPlugins  from './controllers/executePlugins.js';
+import cron from 'node-cron';
 
 
 
@@ -12,9 +11,14 @@ const app = express();
 app.use(express.json());
 // connectToDB('select * from Pokemons_tbl');
 
-// runPlugins();
+
 // createPluginsInstances();
-tryFunc();
+let instanes=await createPluginsInstances();
+console.log(instanes);
+cron.schedule("* * * * *",()=>{
+    runPlugins(instanes);
+})
+
 
 app.listen(5000, () => {
     console.log("App is listening on port 5000");
