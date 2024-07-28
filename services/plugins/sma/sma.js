@@ -1,17 +1,26 @@
 import smaParamsJson from './sma.json' assert {'type': 'json'};
+// import { connectToDB } from '../../../config/DBConfig.js';
+// import saveNotifactionInDB from '../../../controllers/saveNotificationsInDB.js';
 
 export default class sma {
 
 	valueFunc = undefined;
 
 	calcSma(data, length, func) {
-		let dataEndSliceData = data.slice(-length);
-		return dataEndSliceData.reduce((acc, elem) => acc + func(elem) / length, 0)
+
+		let EndSliceData = data.slice(-length);
+		return EndSliceData.reduce((acc, elem) => acc + func(elem) / length, 0)
 	}
 
-	checkNotificationByUpOrDown(a,b){
-		return (a>b&&(a-b)/a>smaParamsJson.minimalDiffPrecents);
+	checkNotificationByUpOrDown(a, b, todayCandle, upOrDown, length) {
+		console.log('---xxxx', todayCandle)
+		if (a > b && (a - b) / a > smaParamsJson.minimalDiffPrecents) {
+			//saveNotificationInDB(`sma_${upOrDown}_${length}`,todayCandle.Symbol,todayCandle.Date,todayCandle.High,todayCandle.Low,todayCandle.Open,todayCandle.Close,todayCandle.Volume);            return { type: `sma_${upOrDown}_${length}`, candle: todayCandle }}
+			return { type: `sma_${upOrDown}_${length}`, candle: todayCandle }
+		}
+		return { type: "sma", candle: undefined };
 	}
+
 
 	execute(data, params) {
 		// {length,upOrDown,symbol,func}
@@ -24,17 +33,13 @@ export default class sma {
 		let todaySma = this.calcSma(data, length, this.valueFunc);
 		let todayValue = this.valueFunc(data[data.length - 1]);
 		let obj = {
-			up: (todayValue, todaySma, todayCandle) => {
-				return this.checkNotificationByUpOrDown(todayValue,todaySma)?{ type: `sma_${upOrDown}_${length}`, candle: todayCandle }
-				: { type: "sma", candle: undefined };
-			}, down: (todayValue, todaySma, todayCandle) => {
-				if (todaySma > todayValue && (todaySma - todayValue) / todaySma > smaParamsJson.minimalDiffPrecents)
-					return { type: `sma_${upOrDown}_${length}`, candle: todayCandle };
-				return { type: "sma", candle: undefined };
+			up: (todayValue, todaySma, todayCandle, length) => {
+				return this.checkNotificationByUpOrDown(todayValue, todaySma, todayCandle, "up", length);
+			}, down: (todayValue, todaySma, todayCandle, length) => {
+				return this.checkNotificationByUpOrDown(todaySma, todayValue, todayCandle, "down", length);
 			}
 		}
 		console.log("today sma->", todaySma, "today value->", todayValue);
-		return obj[upOrDown](todayValue, todaySma, todayCandle);
+		return obj[upOrDown](todayValue, todaySma, todayCandle, length);
 	}
 }
-
