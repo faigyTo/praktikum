@@ -14,10 +14,10 @@ import pluginArr from '../services/plugins/config.json' assert {'type':"json"};
 
 
 
-export default function runPlugins(data,instances) {
+export default function runPlugins(symbol,data,instances) {
     pluginArr.map(params => {
         let [pluginName,pluginValue] = Object.entries(params)[0];
         let instance = instances.find(ins => ins.name == pluginName).instance
-        instance.execute(data,pluginValue)
+        instance.execute(symbol,data,pluginValue)
     })
 }

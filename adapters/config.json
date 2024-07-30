@@ -1,0 +1,7 @@
+{
+	"tickers":{"adapter":"./getTickersByNameFSAdapter.js","path":"../DATA"}
+	,"connection": {
+        "adapter": "./connectSqlAdapter.js",
+        "connectionString": "Driver=SQL Server Native Client 11.0;Server=DESKTOP-A8CKV4D\\SQLEXPRESS;Database=Notification_DB;Trusted_Connection=yes"
+    }
+}

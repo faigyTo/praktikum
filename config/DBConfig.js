@@ -70,8 +70,8 @@
 
 import sql from 'msnodesqlv8';
 
-export function connectToDB(query, params) {
-    const connectionString = `Driver=${process.env.DRIVER};Server=${process.env.SERVER};Database=${process.env.DB_NAME};Trusted_Connection=${process.env.TRUSTED_CONNECTION};`
+export function connectToDB(connectionString,query, params) {
+    //const connectionString = `Driver=${process.env.DRIVER};Server=${process.env.SERVER};Database=${process.env.DB_NAME};Trusted_Connection=${process.env.TRUSTED_CONNECTION};`
     
     sql.open(connectionString, (err, conn) => {
         if (err) {

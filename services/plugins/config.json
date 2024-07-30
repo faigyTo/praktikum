@@ -1,61 +1,58 @@
 [
     {
-        "plugin1": {
-            "x": 15
-        }
-    },
-    {
-        "plugin2": {
-            "x": 50,
-            "y": 60
-        }
-    },
-    {
-        "plugin2": {
-            "x": 25,
-            "y": 30
-        }
-    },
-    {
         "sma": {
             "length": 10,
             "upOrDown": "up",
-            "func": "(x)=>x.Close"
+            "func": "(x)=>x.Close",
+            "minimalDiffPrecents":0
         }
     },
     {
         "sma": {
             "length": 10,
             "upOrDown": "down",
-            "func": "(x)=>x.Close"
+            "func": "(x)=>x.Close",
+            "minimalDiffPrecents":0
         }
     },
     {
         "sma": {
             "length": 20,
             "upOrDown": "up",
-            "func": "(x)=>x.Close"
+            "func": "(x)=>x.Close",
+            "minimalDiffPrecents":0
         }
     },
     {
         "sma": {
             "length": 20,
             "upOrDown": "down",
-            "func": "(x)=>x.Close"
+            "func": "(x)=>x.Close",
+            "minimalDiffPrecents":0
         }
     },
     {
         "sma": {
             "length": 50,
             "upOrDown": "up",
-            "func": "(x)=>x.Volume"
+            "func": "(x)=>x.Close",
+            "minimalDiffPrecents":0
         }
     },
     {
         "sma": {
             "length": 50,
             "upOrDown": "down",
-            "func": "(x)=>x.Close"
+            "func": "(x)=>x.Close",
+            "minimalDiffPrecents":0
+        }
+    },
+    {
+        "sma": {
+            "length": 30,
+            "upOrDown": "up",
+            "func": "(x)=>x.Volume",
+            "minimalDiffPrecents":0.1
         }
     }
 ]
