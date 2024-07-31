@@ -4,18 +4,18 @@ import { createPluginsInstances } from './controllers/createPluginsIntances.js'
 import runPlugins from './controllers/executePlugins.js';
 import cron from 'node-cron';
 import returnData from './adapters/getTikers/testFSAdapter.js';
-
+import tickerRouter from './routes/tickers.js';
+import cors from 'cors';
 
 
 config();
 const app = express();
 app.use(express.json());
-// connectToDB('select * from Pokemons_tbl');
+app.use(cors());
+
+app.use("/api/tickers",tickerRouter);
 
 
-
-
-// createPluginsInstances();
 let instanes = await createPluginsInstances();
 // console.log(instanes);
 // cron.schedule("0 0 * * *",()=>{

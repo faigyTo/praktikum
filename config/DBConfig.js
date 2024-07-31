@@ -70,25 +70,30 @@
 
 import sql from 'msnodesqlv8';
 
-export function connectToDB(connectionString,query, params) {
+export function connectToDB(connectionString, query, params) {
     //const connectionString = `Driver=${process.env.DRIVER};Server=${process.env.SERVER};Database=${process.env.DB_NAME};Trusted_Connection=${process.env.TRUSTED_CONNECTION};`
-    
-    sql.open(connectionString, (err, conn) => {
-        if (err) {
-            console.error('Failed to open SQL Server connection:', err);
-            return;
-        }
-
-        conn.query(query, params, (err) => {
+    return new Promise((resolve, reject) => {
+        sql.open(connectionString, (err, conn) => {
             if (err) {
-                console.error('Failed to execute query:', err);
+                console.error('Failed to open SQL Server connection:', err);
+                reject(err)
                 return;
             }
 
-            console.log('The query was executed successfully');
+            conn.query(query, params, (err, result) => {
+                if (err) {
+                    console.error('Failed to execute query:', err);
+                    reject(err)
+                    return;
+                }
+                resolve(result);
 
-            // Close the connection
-            conn.close();
+                console.log('The query was executed successfully');
+
+                // Close the connection
+                conn.close();
+                return result;
+            });
         });
-    });
+    })
 }
