@@ -1,0 +1,34 @@
+.trading-view-container {
+	width: 100%;
+	height: 100vh; /* גובה של 100% מגובה המסך */
+	display: flex;
+	flex-direction: column;
+  }
+  
+  .trading-view-widget {
+	flex-grow: 1;
+	width: 100%;
+	min-height: 500px; /* גובה מינימלי */
+  }
+
+  .close-button {
+	position: absolute;
+	top: 10px;
+	/* right: 10px; */
+	background-color: #f1f3f6;
+	border: none;
+	border-radius: 50%;
+	width: 30px;
+	height: 30px;
+	font-size: 18px;
+	cursor: pointer;
+	z-index: 10;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: red;
+  }
+  
+  .close-button:hover {
+	background-color: #d1d3d6;
+  }

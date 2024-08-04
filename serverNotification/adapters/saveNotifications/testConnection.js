@@ -1,4 +1,4 @@
-import config from "../config.json" assert {"type": "json"};
+import config from "../adapterConfig.json" assert {"type": "json"};
 
 async function importAdapter(adapterPath) {
 	return await import(adapterPath);

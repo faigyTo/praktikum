@@ -1,8 +1,5 @@
 import connectAndSave from '../../../adapters/saveNotifications/testConnection.js';
-import calcSma from '../../functions/calcSma.js';
-import smaParamsJson from './sma.json' assert {'type': 'json'};
-// import { connectToDB } from '../../../config/DBConfig.js';
-// import saveNotifactionInDB from '../../../controllers/saveNotificationsInDB.js';
+import calcSma from '../../pluginsFunctions/calcSma.js';
 
 export default class sma {
 
@@ -12,9 +9,7 @@ export default class sma {
 
 	checkNotificationByUpOrDown(a, b, todayCandle, symbol, upOrDown, length,minimalDiffPrecents,funcName) {
 		if (a > b && (a - b) / a > minimalDiffPrecents) {
-			// connectAndSave(`sma_${upOrDown}_${funcName}_${length}`,symbol,todayCandle.Date,todayCandle.High,todayCandle.Low,todayCandle.Open,todayCandle.Close,todayCandle.Volume);      
-			console.log(`--------------- sma_${upOrDown}_${funcName}_${length} --------------------`);
-			console.log({ type: `sma_${upOrDown}_${funcName}_${length}`, symbol, candle: todayCandle });
+			connectAndSave(`sma_${upOrDown}_${funcName}_${length}`,symbol,todayCandle.Date,todayCandle.High,todayCandle.Low,todayCandle.Open,todayCandle.Close,todayCandle.Volume);      
 			return { type: `sma_${upOrDown}_${length}`, symbol, candle: todayCandle }
 		}
 		return { type: "sma", candle: undefined };

@@ -1,0 +1,14 @@
+{
+	"tickers": {
+		"adapter": "./getTickersByNameFSAdapter.js",
+		"path": "../DATA"
+	},
+	"connection": {
+		"adapter": "./connectSqlAdapter.js",
+		"connectionString": "Driver=SQL Server Native Client 11.0;Server=MYCOMP\\MYSQL;Database=Notification;Trusted_Connection=yes"
+	},
+	"selectFromDB": {
+		"adapter": "./selectFromSqlAdapter.js",
+		"connectionString": "Driver=SQL Server Native Client 11.0;Server=MYCOMP\\MYSQL;Database=Notification;Trusted_Connection=yes"
+	}
+}

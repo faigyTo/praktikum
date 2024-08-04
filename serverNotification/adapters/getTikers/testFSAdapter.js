@@ -1,4 +1,4 @@
-import config from "../config.json" assert {"type": "json"};
+import config from "../adapterConfig.json" assert {"type": "json"};
 //import getTickersByNameFSAdapter from "../getTickersByNameFSAdapter.js";
 
 async function importAdapter(adapterPath) {
